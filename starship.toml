@@ -1,0 +1,102 @@
+# ==============================================================================
+# STARSHIP CONFIGURATION — Production TUI Layout Configuration
+# ==============================================================================
+
+# Global layout composition matrix
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$custom\
+$fill\
+$cmd_duration\
+$jobs\
+$status\
+$line_break\
+$character"""
+
+# Right-hand prompt layout configuration
+right_format = """$time"""
+
+# ── Prompt Core Structural Constraints ────────────────────────────────────────
+
+[line_break]
+disabled = false
+
+[character]
+success_symbol = "[❯](bold cyan)"
+error_symbol = "[❯](bold red)"
+vicmd_symbol = "[❮](bold green)"
+
+[fill]
+symbol = " "
+style = "dimmed gray"
+
+# ── System Environment Context Modules ────────────────────────────────────────
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+style = "bold blue"
+read_only = " 🔒"
+truncation_symbol = "…/"
+
+[username]
+style_user = "bold yellow"
+style_root = "bold red"
+format = "[$user]($style) "
+disabled = false
+show_always = false
+
+[hostname]
+ssh_only = true
+format = "@[$hostname]($style) "
+style = "bold dimmed white"
+
+[time]
+disabled = false
+format = "[\[ $time \]]($style)"
+time_format = "%R"
+style = "bg:235 yellow"
+
+# ── Version Control Management Architecture ───────────────────────────────────
+
+[git_branch]
+symbol = "⎇ "
+style = "bold magenta"
+format = "on [$symbol$branch]($style) "
+
+[git_status]
+style = "bold red"
+format = "([\[$all_status$ahead_behind\]]($style) )"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration]($style) "
+style = "bold yellow"
+
+[jobs]
+symbol = "⚙ "
+style = "bold rosey"
+number_threshold = 1
+format = "[$symbol$number]($style) "
+
+[status]
+disabled = false
+format = "[$symbol$status]($style) "
+symbol = "✘ "
+success_symbol = ""
