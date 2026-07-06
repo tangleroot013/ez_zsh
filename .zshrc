@@ -430,3 +430,6 @@ jump() {
   fi
 }
  
+
+# Rootless NPM Global Binary Path
+export PATH="/home/tangleroot013/.npm-global/bin:$PATH"
